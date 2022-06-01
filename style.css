@@ -1,0 +1,25 @@
+.success,
+.error {
+    color: white;
+    padding: 5px;
+    margin: 5px 0 15px 0;
+}
+
+.success {
+    background: green;
+}
+
+.error {
+    background: red;
+}
+
+#myButton,
+tr:nth-child(even) {
+    /* border: 2px solid red; */
+    background-color: #71a6d2d0;
+    color: white;
+}
+
+h1{
+    text-align: center;
+}
