@@ -13,14 +13,8 @@ class UI {
         const row = document.createElement('tr');
 
         //Apply class to row
+        row.id = 'tableRows';
 
-        // row.classList.add('tableStyles')
-        //Insert Columns
-        // row.innerHTML = `
-        // <td>${song.songTitle}</td>
-        // <td>${song.artist}</td>
-        // <td><a href="#" class="delete">X<a></td>
-        // `;
         row.innerHTML = `
         <td>${song.songTitle}</td>
         <td>${song.artist}</td>
@@ -60,7 +54,6 @@ class UI {
         const tbody = document.querySelector('#play-list');
         tbody.innerHTML = '';
     }
-
 }
 
 // Local Storage Class
@@ -189,4 +182,17 @@ clearButton.addEventListener('click', function (e) {
     }
 })
 
-//come back to this
+// Event Listener for Filter Input
+const filter = document.querySelector('#filter')
+
+filter.addEventListener('keyup', function (e) {
+    const text = e.target.value.toLowerCase();
+    const rows = document.querySelectorAll('#tableRows');
+    for (let row of rows) {
+        if (row.textContent.toLowerCase().indexOf(text) != -1) {
+            row.style.display = 'table-row';
+        } else {
+            row.style.display = 'none'
+        }
+    }
+})
