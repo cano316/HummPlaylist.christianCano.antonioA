@@ -54,6 +54,17 @@ class UI {
         const tbody = document.querySelector('#play-list');
         tbody.innerHTML = '';
     }
+    filterPlaylist(e) {
+        const text = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('#tableRows');
+        for (let row of rows) {
+            if (row.textContent.toLowerCase().indexOf(text) != -1) {
+                row.style.display = 'table-row';
+            } else {
+                row.style.display = 'none'
+            }
+        }
+    }
 }
 
 // Local Storage Class
@@ -186,13 +197,8 @@ clearButton.addEventListener('click', function (e) {
 const filter = document.querySelector('#filter')
 
 filter.addEventListener('keyup', function (e) {
-    const text = e.target.value.toLowerCase();
-    const rows = document.querySelectorAll('#tableRows');
-    for (let row of rows) {
-        if (row.textContent.toLowerCase().indexOf(text) != -1) {
-            row.style.display = 'table-row';
-        } else {
-            row.style.display = 'none'
-        }
-    }
+
+    const ui = new UI();
+
+    ui.filterPlaylist(e);
 })
