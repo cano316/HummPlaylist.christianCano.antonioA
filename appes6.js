@@ -48,7 +48,7 @@ class UI {
         }, 2000);
     }
     deleteSong(target) {
-        if (target.classList.contains('delete')){
+        if (target.classList.contains('delete')) {
             target.parentElement.parentElement.remove();
         }
     }
@@ -56,6 +56,11 @@ class UI {
         document.getElementById('songTitle').value = '';
         document.getElementById('artist').value = '';
     }
+    clearList() {
+        const tbody = document.querySelector('#play-list');
+        tbody.innerHTML = '';
+    }
+
 }
 
 // Local Storage Class
@@ -99,6 +104,10 @@ class Storage {
         });
 
         localStorage.setItem('songs', JSON.stringify(songs));
+    }
+
+    static clearSongs() {
+        localStorage.clear();
     }
 }
 
@@ -160,9 +169,24 @@ document.getElementById('play-list')
 
 const clearButton = document.querySelector('#clearButton')
 
-clearButton.addEventListener('click', function () {
+clearButton.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (confirm('Are you sure you would like to clear the playlist?') == true) {
+        //Clear local storage
+        Storage.clearSongs();
 
-    localStorage.clear();
+        //instantiate UI
+
+        const ui = new UI();
+
+        // Clear the playlist
+
+        ui.clearList();
+
+        // Show alert
+
+        ui.showAlert('Successfully cleared playlist', 'success')
+    }
 })
 
 //come back to this
